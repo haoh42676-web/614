@@ -1,0 +1,3569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="614宿舍综合平台 - 便捷服务，智慧生活">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <title>614宿舍综合平台</title>
+    <style>
+        /* ==================== CSS Reset ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary-color: #07C160;
+            --primary-dark: #06AD56;
+            --primary-light: #95EC69;
+            --accent-color: #FFD100;
+            --bg-color: #F5F5F5;
+            --card-bg: #FFFFFF;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-hint: #999999;
+            --border-color: #E5E5E5;
+            --danger-color: #E74C3C;
+            --warning-color: #F39C12;
+            --info-color: #3498DB;
+            --success-color: #2ECC71;
+            
+            /* 响应式变量 */
+            --sidebar-width: 260px;
+            --sidebar-collapsed-width: 70px;
+            --topbar-height: 64px;
+            --bottom-nav-height: 60px;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ==================== 启动动画 ==================== */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #07C160 0%, #06AD56 50%, #059B4B 100%);
+            background: -webkit-linear-gradient(135deg, #07C160 0%, #06AD56 50%, #059B4B 100%);
+            background: -moz-linear-gradient(135deg, #07C160 0%, #06AD56 50%, #059B4B 100%);
+            background: -o-linear-gradient(135deg, #07C160 0%, #06AD56 50%, #059B4B 100%);
+            z-index: 9999;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -moz-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            opacity: 1;
+            will-change: opacity, transform;
+            -webkit-transition: opacity 0.8s ease-out, -webkit-transform 0.8s ease-out;
+            -moz-transition: opacity 0.8s ease-out, -moz-transform 0.8s ease-out;
+            -o-transition: opacity 0.8s ease-out, -o-transform 0.8s ease-out;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .splash-screen.fade-out {
+            opacity: 0;
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 24px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            will-change: transform;
+            -webkit-animation: logoPulse 2s ease-in-out infinite;
+            -moz-animation: logoPulse 2s ease-in-out infinite;
+            -o-animation: logoPulse 2s ease-in-out infinite;
+            animation: logoPulse 2s ease-in-out infinite;
+        }
+
+        .splash-logo svg {
+            width: 80px;
+            height: 80px;
+            fill: white;
+        }
+
+        @-webkit-keyframes logoPulse {
+            0%, 100% { -webkit-transform: scale(1); transform: scale(1); }
+            50% { -webkit-transform: scale(1.05); transform: scale(1.05); }
+        }
+        @-moz-keyframes logoPulse {
+            0%, 100% { -moz-transform: scale(1); transform: scale(1); }
+            50% { -moz-transform: scale(1.05); transform: scale(1.05); }
+        }
+        @-o-keyframes logoPulse {
+            0%, 100% { -o-transform: scale(1); transform: scale(1); }
+            50% { -o-transform: scale(1.05); transform: scale(1.05); }
+        }
+        @keyframes logoPulse {
+            0%, 100% { -webkit-transform: scale(1); -moz-transform: scale(1); -ms-transform: scale(1); -o-transform: scale(1); transform: scale(1); }
+            50% { -webkit-transform: scale(1.05); -moz-transform: scale(1.05); -ms-transform: scale(1.05); -o-transform: scale(1.05); transform: scale(1.05); }
+        }
+
+        .splash-title {
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0;
+            -webkit-animation: slideUp 0.6s ease-out 0.3s forwards;
+            -moz-animation: slideUp 0.6s ease-out 0.3s forwards;
+            -o-animation: slideUp 0.6s ease-out 0.3s forwards;
+            animation: slideUp 0.6s ease-out 0.3s forwards;
+        }
+
+        .splash-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 16px;
+            opacity: 0;
+            -webkit-animation: slideUp 0.6s ease-out 0.5s forwards;
+            -moz-animation: slideUp 0.6s ease-out 0.5s forwards;
+            -o-animation: slideUp 0.6s ease-out 0.5s forwards;
+            animation: slideUp 0.6s ease-out 0.5s forwards;
+        }
+
+        .splash-loading {
+            width: 48px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            margin-top: 32px;
+            overflow: hidden;
+            opacity: 0;
+            -webkit-animation: fadeIn 0.6s ease-out 0.7s forwards;
+            -moz-animation: fadeIn 0.6s ease-out 0.7s forwards;
+            -o-animation: fadeIn 0.6s ease-out 0.7s forwards;
+            animation: fadeIn 0.6s ease-out 0.7s forwards;
+        }
+
+        .splash-loading-bar {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            will-change: width;
+            -webkit-animation: loadingProgress 2s ease-in-out 0.8s forwards;
+            -moz-animation: loadingProgress 2s ease-in-out 0.8s forwards;
+            -o-animation: loadingProgress 2s ease-in-out 0.8s forwards;
+            animation: loadingProgress 2s ease-in-out 0.8s forwards;
+        }
+
+        @-webkit-keyframes slideUp {
+            from { opacity: 0; -webkit-transform: translateY(20px); transform: translateY(20px); }
+            to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+        }
+        @-moz-keyframes slideUp {
+            from { opacity: 0; -moz-transform: translateY(20px); transform: translateY(20px); }
+            to { opacity: 1; -moz-transform: translateY(0); transform: translateY(0); }
+        }
+        @-o-keyframes slideUp {
+            from { opacity: 0; -o-transform: translateY(20px); transform: translateY(20px); }
+            to { opacity: 1; -o-transform: translateY(0); transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; -webkit-transform: translateY(20px); -moz-transform: translateY(20px); -ms-transform: translateY(20px); -o-transform: translateY(20px); transform: translateY(20px); }
+            to { opacity: 1; -webkit-transform: translateY(0); -moz-transform: translateY(0); -ms-transform: translateY(0); -o-transform: translateY(0); transform: translateY(0); }
+        }
+
+        @-webkit-keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @-moz-keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @-o-keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @-webkit-keyframes loadingProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+        @-moz-keyframes loadingProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+        @-o-keyframes loadingProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        /* 粒子效果 */
+        .particles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            will-change: transform, opacity;
+            -webkit-animation: particleFloat linear infinite;
+            -moz-animation: particleFloat linear infinite;
+            -o-animation: particleFloat linear infinite;
+            animation: particleFloat linear infinite;
+        }
+
+        @-webkit-keyframes particleFloat {
+            0% { -webkit-transform: translateY(100vh) rotate(0deg); transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { -webkit-transform: translateY(-100px) rotate(720deg); transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+        @-moz-keyframes particleFloat {
+            0% { -moz-transform: translateY(100vh) rotate(0deg); transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { -moz-transform: translateY(-100px) rotate(720deg); transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+        @-o-keyframes particleFloat {
+            0% { -o-transform: translateY(100vh) rotate(0deg); transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { -o-transform: translateY(-100px) rotate(720deg); transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+        @keyframes particleFloat {
+            0% { -webkit-transform: translateY(100vh) rotate(0deg); -moz-transform: translateY(100vh) rotate(0deg); transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { -webkit-transform: translateY(-100px) rotate(720deg); -moz-transform: translateY(-100px) rotate(720deg); transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+
+        /* ==================== 主容器 ==================== */
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ==================== 头部样式 ==================== */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: -webkit-linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: -moz-linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: -o-linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .header-top {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .header-back {
+            width: 40px;
+            height: 40px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            will-change: transform;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            /* 触控优化：增大可点击区域 */
+            padding: 10px;
+            margin: -10px;
+        }
+
+        .header-back:hover {
+            background: rgba(255,255,255,0.3);
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            transform: scale(1.05);
+        }
+
+        .header-back svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -moz-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+
+        .header-placeholder {
+            width: 40px;
+        }
+
+        /* 搜索框 */
+        .search-box {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 10px 16px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .search-box svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(255,255,255,0.8);
+        }
+
+        .search-box span {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        /* ==================== 页面内容 ==================== */
+        .page-content {
+            padding: 16px;
+            padding-bottom: calc(var(--bottom-nav-height) + 20px);
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            will-change: opacity, transform;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .page.slide-in {
+            -webkit-animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            -moz-animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            -o-animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .page.slide-out {
+            -webkit-animation: slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            -moz-animation: slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            -o-animation: slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @-webkit-keyframes slideIn {
+            from { opacity: 0; -webkit-transform: translateX(100%); transform: translateX(100%); }
+            to { opacity: 1; -webkit-transform: translateX(0); transform: translateX(0); }
+        }
+        @-moz-keyframes slideIn {
+            from { opacity: 0; -moz-transform: translateX(100%); transform: translateX(100%); }
+            to { opacity: 1; -moz-transform: translateX(0); transform: translateX(0); }
+        }
+        @-o-keyframes slideIn {
+            from { opacity: 0; -o-transform: translateX(100%); transform: translateX(100%); }
+            to { opacity: 1; -o-transform: translateX(0); transform: translateX(0); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; -webkit-transform: translateX(100%); -moz-transform: translateX(100%); transform: translateX(100%); }
+            to { opacity: 1; -webkit-transform: translateX(0); -moz-transform: translateX(0); transform: translateX(0); }
+        }
+
+        @-webkit-keyframes slideOut {
+            from { opacity: 1; -webkit-transform: translateX(0); transform: translateX(0); }
+            to { opacity: 0; -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+        }
+        @-moz-keyframes slideOut {
+            from { opacity: 1; -moz-transform: translateX(0); transform: translateX(0); }
+            to { opacity: 0; -moz-transform: translateX(-100%); transform: translateX(-100%); }
+        }
+        @-o-keyframes slideOut {
+            from { opacity: 1; -o-transform: translateX(0); transform: translateX(0); }
+            to { opacity: 0; -o-transform: translateX(-100%); transform: translateX(-100%); }
+        }
+        @keyframes slideOut {
+            from { opacity: 1; -webkit-transform: translateX(0); -moz-transform: translateX(0); transform: translateX(0); }
+            to { opacity: 0; -webkit-transform: translateX(-100%); -moz-transform: translateX(-100%); transform: translateX(-100%); }
+        }
+
+        /* ==================== 欢迎区域 ==================== */
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #05A34E 100%);
+            background: -webkit-linear-gradient(135deg, var(--primary-color) 0%, #05A34E 100%);
+            background: -moz-linear-gradient(135deg, var(--primary-color) 0%, #05A34E 100%);
+            background: -o-linear-gradient(135deg, var(--primary-color) 0%, #05A34E 100%);
+            border-radius: 16px;
+            padding: 24px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            will-change: opacity, transform;
+            -webkit-animation: cardAppear 0.6s ease-out 0.2s forwards;
+            -moz-animation: cardAppear 0.6s ease-out 0.2s forwards;
+            -o-animation: cardAppear 0.6s ease-out 0.2s forwards;
+            animation: cardAppear 0.6s ease-out 0.2s forwards;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-section::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            right: -20%;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .welcome-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .welcome-time {
+            font-size: 13px;
+            opacity: 0.8;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @-webkit-keyframes cardAppear {
+            from { opacity: 0; -webkit-transform: translateY(30px) scale(0.95); transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; -webkit-transform: translateY(0) scale(1); transform: translateY(0) scale(1); }
+        }
+        @-moz-keyframes cardAppear {
+            from { opacity: 0; -moz-transform: translateY(30px) scale(0.95); transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; -moz-transform: translateY(0) scale(1); transform: translateY(0) scale(1); }
+        }
+        @-o-keyframes cardAppear {
+            from { opacity: 0; -o-transform: translateY(30px) scale(0.95); transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; -o-transform: translateY(0) scale(1); transform: translateY(0) scale(1); }
+        }
+        @keyframes cardAppear {
+            from { opacity: 0; -webkit-transform: translateY(30px) scale(0.95); -moz-transform: translateY(30px) scale(0.95); transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; -webkit-transform: translateY(0) scale(1); -moz-transform: translateY(0) scale(1); transform: translateY(0) scale(1); }
+        }
+
+        /* ==================== 功能卡片 ==================== */
+        .services-grid {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .service-card {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1 1 calc(33.333% - 12px);
+            -moz-flex: 1 1 calc(33.333% - 12px);
+            -ms-flex: 1 1 calc(33.333% - 12px);
+            flex: 1 1 calc(33.333% - 12px);
+            min-width: calc(33.333% - 12px);
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px 12px;
+            text-align: center;
+            cursor: pointer;
+            will-change: transform;
+            -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            will-change: opacity, transform;
+            -webkit-animation: cardAppear 0.6s ease-out forwards;
+            -moz-animation: cardAppear 0.6s ease-out forwards;
+            -o-animation: cardAppear 0.6s ease-out forwards;
+            animation: cardAppear 0.6s ease-out forwards;
+        }
+
+        .service-card:nth-child(1) { -webkit-animation-delay: 0.3s; animation-delay: 0.3s; }
+        .service-card:nth-child(2) { -webkit-animation-delay: 0.4s; animation-delay: 0.4s; }
+        .service-card:nth-child(3) { -webkit-animation-delay: 0.5s; animation-delay: 0.5s; }
+
+        .service-card:hover {
+            -webkit-transform: translateY(-4px);
+            -moz-transform: translateY(-4px);
+            transform: translateY(-4px);
+            -webkit-box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            -moz-box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .service-card:active {
+            -webkit-transform: translateY(-2px) scale(0.98);
+            -moz-transform: translateY(-2px) scale(0.98);
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            background: -webkit-linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            background: -moz-linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            background: -o-linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            opacity: 0;
+            -webkit-transition: opacity 0.3s ease;
+            -moz-transition: opacity 0.3s ease;
+            -o-transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            position: relative;
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon.blue {
+            background: linear-gradient(135deg, #4A90D9, #357ABD);
+            background: -webkit-linear-gradient(135deg, #4A90D9, #357ABD);
+            background: -moz-linear-gradient(135deg, #4A90D9, #357ABD);
+            background: -o-linear-gradient(135deg, #4A90D9, #357ABD);
+        }
+
+        .service-icon.green {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: -webkit-linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: -moz-linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: -o-linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .service-icon.purple {
+            background: linear-gradient(135deg, #9B59B6, #8E44AD);
+            background: -webkit-linear-gradient(135deg, #9B59B6, #8E44AD);
+            background: -moz-linear-gradient(135deg, #9B59B6, #8E44AD);
+            background: -o-linear-gradient(135deg, #9B59B6, #8E44AD);
+        }
+
+        .service-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .service-desc {
+            font-size: 11px;
+            color: var(--text-hint);
+            margin-top: 4px;
+        }
+
+        /* ==================== 快捷入口 ==================== */
+        .quick-actions {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            opacity: 0;
+            will-change: opacity, transform;
+            -webkit-animation: cardAppear 0.6s ease-out 0.6s forwards;
+            -moz-animation: cardAppear 0.6s ease-out 0.6s forwards;
+            -o-animation: cardAppear 0.6s ease-out 0.6s forwards;
+            animation: cardAppear 0.6s ease-out 0.6s forwards;
+        }
+
+        .section-header {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-more {
+            font-size: 13px;
+            color: var(--text-hint);
+            cursor: pointer;
+        }
+
+        .quick-list {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -moz-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quick-item {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            cursor: pointer;
+            will-change: transform;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            /* 触控优化：最小点击区域 */
+            min-height: 44px;
+        }
+
+        .quick-item:hover {
+            background: #EBEBEB;
+        }
+
+        .quick-item:active {
+            -webkit-transform: scale(0.98);
+            -moz-transform: scale(0.98);
+            transform: scale(0.98);
+        }
+
+        .quick-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .quick-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .quick-info {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -moz-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+
+        .quick-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .quick-desc {
+            font-size: 12px;
+            color: var(--text-hint);
+            margin-top: 2px;
+        }
+
+        .quick-arrow {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-hint);
+        }
+
+        /* ==================== 表单样式 ==================== */
+        .form-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .form-section-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-section-title::before {
+            content: '';
+            width: 3px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .form-label .required {
+            color: #E74C3C;
+            margin-left: 4px;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--text-primary);
+            background: white;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            outline: none;
+            /* 触控优化 */
+            -webkit-touch-callout: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            -webkit-box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+            -moz-box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+        }
+
+        .form-input::-webkit-input-placeholder {
+            color: var(--text-hint);
+        }
+
+        .form-input::-moz-placeholder {
+            color: var(--text-hint);
+            opacity: 1;
+        }
+
+        .form-input:-ms-input-placeholder {
+            color: var(--text-hint);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-hint);
+        }
+
+        .form-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--text-primary);
+            background: white;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            outline: none;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .form-textarea:focus {
+            border-color: var(--primary-color);
+            -webkit-box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+            -moz-box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--text-primary);
+            background: white;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23999' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            cursor: pointer;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary-color);
+            -webkit-box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+            -moz-box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+            box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-hint);
+            margin-top: 8px;
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: #E74C3C;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .form-group.error .form-input,
+        .form-group.error .form-select,
+        .form-group.error .form-textarea {
+            border-color: #E74C3C;
+        }
+
+        .form-group.error .form-error {
+            display: block;
+        }
+
+        /* ==================== 按钮样式 ==================== */
+        .btn {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 48px;
+            padding: 0 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            will-change: transform;
+            -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            outline: none;
+            /* 触控优化 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: -webkit-linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: -moz-linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: -o-linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            -webkit-box-shadow: 0 4px 12px rgba(7, 193, 96, 0.3);
+            -moz-box-shadow: 0 4px 12px rgba(7, 193, 96, 0.3);
+            box-shadow: 0 4px 12px rgba(7, 193, 96, 0.3);
+        }
+
+        .btn-primary:hover {
+            -webkit-transform: translateY(-2px);
+            -moz-transform: translateY(-2px);
+            transform: translateY(-2px);
+            -webkit-box-shadow: 0 6px 20px rgba(7, 193, 96, 0.4);
+            -moz-box-shadow: 0 6px 20px rgba(7, 193, 96, 0.4);
+            box-shadow: 0 6px 20px rgba(7, 193, 96, 0.4);
+        }
+
+        .btn-primary:active {
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        /* ==================== 投诉类型选择 ==================== */
+        .type-options {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .type-option {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1 1 calc(50% - 6px);
+            -moz-flex: 1 1 calc(50% - 6px);
+            -ms-flex: 1 1 calc(50% - 6px);
+            flex: 1 1 calc(50% - 6px);
+            min-width: calc(50% - 6px);
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            text-align: center;
+            /* 触控优化 */
+            min-height: 44px;
+        }
+
+        .type-option:hover {
+            border-color: var(--primary-color);
+            background: rgba(7, 193, 96, 0.05);
+        }
+
+        .type-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(7, 193, 96, 0.1);
+        }
+
+        .type-option-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 8px;
+            border-radius: 10px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            background: var(--bg-color);
+        }
+
+        .type-option-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-color);
+        }
+
+        .type-option-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .type-option-desc {
+            font-size: 12px;
+            color: var(--text-hint);
+            margin-top: 4px;
+        }
+
+        /* ==================== 教育事务页面 ==================== */
+        .edu-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 32px 24px;
+            color: white;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            background: -webkit-radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            background: -moz-radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            background: -o-radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            will-change: transform;
+            -webkit-animation: eduCardShine 3s ease-in-out infinite;
+            -moz-animation: eduCardShine 3s ease-in-out infinite;
+            -o-animation: eduCardShine 3s ease-in-out infinite;
+            animation: eduCardShine 3s ease-in-out infinite;
+        }
+
+        @-webkit-keyframes eduCardShine {
+            0%, 100% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+            50% { -webkit-transform: rotate(180deg); transform: rotate(180deg); }
+        }
+        @-moz-keyframes eduCardShine {
+            0%, 100% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+            50% { -moz-transform: rotate(180deg); transform: rotate(180deg); }
+        }
+        @-o-keyframes eduCardShine {
+            0%, 100% { -o-transform: rotate(0deg); transform: rotate(0deg); }
+            50% { -o-transform: rotate(180deg); transform: rotate(180deg); }
+        }
+        @keyframes eduCardShine {
+            0%, 100% { -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); transform: rotate(0deg); }
+            50% { -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); transform: rotate(180deg); }
+        }
+
+        .edu-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .edu-icon svg {
+            width: 48px;
+            height: 48px;
+            fill: white;
+        }
+
+        .edu-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .edu-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .edu-link {
+            display: -webkit-inline-box;
+            display: -webkit-inline-flex;
+            display: -moz-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 32px;
+            background: white;
+            color: #667eea;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            will-change: transform;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .edu-link:hover {
+            -webkit-transform: translateY(-2px);
+            -moz-transform: translateY(-2px);
+            transform: translateY(-2px);
+            -webkit-box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            -moz-box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .edu-link svg {
+            width: 18px;
+            height: 18px;
+            fill: #667eea;
+        }
+
+        .edu-features {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .edu-feature {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1 1 calc(50% - 8px);
+            -moz-flex: 1 1 calc(50% - 8px);
+            -ms-flex: 1 1 calc(50% - 8px);
+            flex: 1 1 calc(50% - 8px);
+            min-width: calc(50% - 8px);
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .edu-feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .edu-feature-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .edu-feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .edu-feature-desc {
+            font-size: 12px;
+            color: var(--text-hint);
+        }
+
+        /* ==================== 成功提示 ==================== */
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .success-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
+            will-change: transform;
+            -webkit-transform: scale(0.8);
+            -moz-transform: scale(0.8);
+            transform: scale(0.8);
+            -webkit-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -moz-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -o-transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .success-modal.show .success-content {
+            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: -webkit-linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: -moz-linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: -o-linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        .success-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .success-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .success-btn {
+            width: 100%;
+        }
+
+        /* ==================== 底部导航 ==================== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid var(--border-color);
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: space-around;
+            -webkit-justify-content: space-around;
+            -moz-justify-content: space-around;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+            padding-bottom: max(8px, -webkit-env(safe-area-inset-bottom));
+            z-index: 100;
+            -webkit-box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
+            -moz-box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
+            box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -moz-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 4px 16px;
+            cursor: pointer;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            /* 触控优化 */
+            min-height: 44px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .nav-item.active .nav-icon svg {
+            fill: var(--primary-color);
+        }
+
+        .nav-item.active .nav-text {
+            color: var(--primary-color);
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 4px;
+        }
+
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-hint);
+            -webkit-transition: fill 0.3s ease;
+            -moz-transition: fill 0.3s ease;
+            -o-transition: fill 0.3s ease;
+            transition: fill 0.3s ease;
+        }
+
+        .nav-text {
+            font-size: 11px;
+            color: var(--text-hint);
+            -webkit-transition: color 0.3s ease;
+            -moz-transition: color 0.3s ease;
+            -o-transition: color 0.3s ease;
+            transition: color 0.3s ease;
+        }
+
+        /* ==================== 响应式断点 ==================== */
+        
+        /* 手机横屏和小平板 */
+        @media screen and (min-width: 576px) {
+            .app-container {
+                max-width: 540px;
+                margin: 0 auto;
+            }
+            
+            .services-grid {
+                gap: 20px;
+            }
+            
+            .service-card {
+                padding: 24px 16px;
+            }
+            
+            .service-icon {
+                width: 64px;
+                height: 64px;
+                margin-bottom: 16px;
+            }
+            
+            .service-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .service-name {
+                font-size: 15px;
+            }
+            
+            .welcome-section {
+                padding: 32px;
+            }
+            
+            .welcome-title {
+                font-size: 28px;
+            }
+            
+            .form-section {
+                padding: 24px;
+            }
+            
+            .quick-actions {
+                padding: 24px;
+            }
+        }
+
+        /* 平板竖屏 */
+        @media screen and (min-width: 768px) {
+            .app-container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            .services-grid {
+                gap: 24px;
+            }
+            
+            .service-card {
+                padding: 28px 20px;
+            }
+            
+            .welcome-section {
+                padding: 40px;
+                border-radius: 20px;
+            }
+            
+            .welcome-title {
+                font-size: 32px;
+            }
+            
+            .welcome-desc {
+                font-size: 16px;
+            }
+            
+            .form-section {
+                padding: 28px;
+                border-radius: 16px;
+            }
+            
+            .quick-actions {
+                padding: 28px;
+                border-radius: 16px;
+            }
+            
+            .edu-card {
+                padding: 40px 32px;
+                border-radius: 20px;
+            }
+            
+            .edu-title {
+                font-size: 28px;
+            }
+            
+            .edu-features {
+                gap: 20px;
+            }
+            
+            .edu-feature {
+                padding: 24px;
+            }
+            
+            .btn {
+                height: 52px;
+                font-size: 17px;
+            }
+            
+            .form-input,
+            .form-select,
+            .form-textarea {
+                height: 52px;
+                font-size: 16px;
+            }
+            
+            .form-textarea {
+                min-height: 140px;
+            }
+        }
+
+        /* 平板横屏和小桌面 */
+        @media screen and (min-width: 992px) {
+            .app-container {
+                max-width: 960px;
+                padding: 0 40px;
+            }
+            
+            .services-grid {
+                gap: 28px;
+            }
+            
+            .service-card {
+                padding: 32px 24px;
+            }
+            
+            .service-icon {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 20px;
+            }
+            
+            .service-icon svg {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .service-name {
+                font-size: 16px;
+            }
+            
+            .service-desc {
+                font-size: 12px;
+            }
+            
+            .welcome-section {
+                padding: 48px;
+            }
+            
+            .welcome-title {
+                font-size: 36px;
+            }
+            
+            .welcome-desc {
+                font-size: 18px;
+            }
+            
+            .welcome-time {
+                font-size: 14px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+            }
+            
+            .quick-item {
+                padding: 16px;
+            }
+            
+            .quick-icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+            }
+            
+            .quick-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .quick-title {
+                font-size: 15px;
+            }
+            
+            .quick-desc {
+                font-size: 13px;
+            }
+            
+            .form-section {
+                padding: 32px;
+            }
+            
+            .form-section-title {
+                font-size: 17px;
+            }
+            
+            .form-label {
+                font-size: 15px;
+            }
+            
+            .type-options {
+                gap: 16px;
+            }
+            
+            .type-option {
+                padding: 20px;
+            }
+            
+            .type-option-icon {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .type-option-name {
+                font-size: 15px;
+            }
+            
+            .type-option-desc {
+                font-size: 13px;
+            }
+        }
+
+        /* 桌面端 */
+        @media screen and (min-width: 1200px) {
+            .app-container {
+                max-width: 1140px;
+            }
+            
+            .services-grid {
+                gap: 32px;
+            }
+            
+            .service-card {
+                padding: 36px 28px;
+            }
+            
+            .welcome-section {
+                padding: 56px;
+            }
+            
+            .welcome-title {
+                font-size: 40px;
+            }
+            
+            .form-section {
+                padding: 36px;
+            }
+            
+            .quick-actions {
+                padding: 32px;
+            }
+        }
+
+        /* 大屏幕桌面端 */
+        @media screen and (min-width: 1400px) {
+            .app-container {
+                max-width: 1320px;
+            }
+        }
+
+        /* 超小屏幕手机 */
+        @media screen and (max-width: 359px) {
+            .service-card {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1 1 100%;
+                -moz-flex: 1 1 100%;
+                -ms-flex: 1 1 100%;
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+            
+            .type-option {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1 1 100%;
+                -moz-flex: 1 1 100%;
+                -ms-flex: 1 1 100%;
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+            
+            .edu-feature {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1 1 100%;
+                -moz-flex: 1 1 100%;
+                -ms-flex: 1 1 100%;
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+            
+            .welcome-title {
+                font-size: 20px;
+            }
+            
+            .welcome-desc {
+                font-size: 13px;
+            }
+            
+            .splash-title {
+                font-size: 24px;
+            }
+            
+            .splash-subtitle {
+                font-size: 14px;
+            }
+        }
+
+        /* 手机竖屏 */
+        @media screen and (max-width: 575px) {
+            .app-container {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .page-content {
+                padding: 12px;
+            }
+            
+            .welcome-section {
+                padding: 20px;
+                border-radius: 12px;
+            }
+            
+            .welcome-title {
+                font-size: 22px;
+            }
+            
+            .form-section {
+                padding: 16px;
+                border-radius: 10px;
+            }
+            
+            .form-section-title {
+                font-size: 14px;
+            }
+            
+            .form-group {
+                margin-bottom: 16px;
+            }
+            
+            .quick-actions {
+                padding: 16px;
+                border-radius: 10px;
+            }
+            
+            .edu-card {
+                padding: 24px 16px;
+                border-radius: 12px;
+            }
+            
+            .edu-title {
+                font-size: 20px;
+            }
+            
+            .edu-desc {
+                font-size: 13px;
+            }
+            
+            .edu-link {
+                padding: 10px 24px;
+                font-size: 14px;
+            }
+            
+            .edu-features {
+                gap: 12px;
+            }
+            
+            .edu-feature {
+                padding: 16px;
+                border-radius: 10px;
+            }
+            
+            .btn {
+                height: 44px;
+                font-size: 15px;
+            }
+            
+            .form-input,
+            .form-select {
+                height: 44px;
+                font-size: 14px;
+            }
+            
+            .form-textarea {
+                min-height: 100px;
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            
+            .success-content {
+                padding: 24px;
+                margin: 0 16px;
+            }
+            
+            .success-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 12px;
+            }
+            
+            .success-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .success-title {
+                font-size: 18px;
+            }
+            
+            .success-desc {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+            
+            .bottom-nav {
+                padding: 6px 0;
+                padding-bottom: max(6px, env(safe-area-inset-bottom));
+                padding-bottom: max(6px, -webkit-env(safe-area-inset-bottom));
+            }
+            
+            .nav-item {
+                padding: 4px 12px;
+            }
+            
+            .nav-icon {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .nav-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .nav-text {
+                font-size: 10px;
+            }
+        }
+
+        /* iPad竖屏 */
+        @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            .app-container {
+                max-width: 768px;
+                padding: 0 24px;
+            }
+            
+            .services-grid {
+                gap: 24px;
+            }
+            
+            .service-card {
+                padding: 28px 20px;
+            }
+            
+            .welcome-section {
+                padding: 36px;
+                border-radius: 18px;
+            }
+            
+            .welcome-title {
+                font-size: 30px;
+            }
+            
+            .form-section {
+                padding: 28px;
+                border-radius: 14px;
+            }
+            
+            .quick-actions {
+                padding: 28px;
+                border-radius: 14px;
+            }
+            
+            .edu-card {
+                padding: 36px 28px;
+                border-radius: 18px;
+            }
+            
+            .edu-title {
+                font-size: 26px;
+            }
+            
+            .edu-features {
+                gap: 18px;
+            }
+            
+            .edu-feature {
+                padding: 22px;
+                border-radius: 14px;
+            }
+            
+            .btn {
+                height: 50px;
+                font-size: 16px;
+            }
+            
+            .form-input,
+            .form-select {
+                height: 50px;
+                font-size: 15px;
+            }
+            
+            .form-textarea {
+                min-height: 130px;
+            }
+        }
+
+        /* iPad横屏 */
+        @media screen and (min-width: 1024px) and (max-width: 1199px) and (orientation: landscape) {
+            .app-container {
+                max-width: 1024px;
+                padding: 0 32px;
+            }
+            
+            .services-grid {
+                gap: 28px;
+            }
+            
+            .service-card {
+                padding: 32px 24px;
+            }
+            
+            .service-icon {
+                width: 68px;
+                height: 68px;
+            }
+            
+            .service-icon svg {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .welcome-section {
+                padding: 44px;
+            }
+            
+            .welcome-title {
+                font-size: 34px;
+            }
+            
+            .form-section {
+                padding: 32px;
+            }
+            
+            .quick-actions {
+                padding: 32px;
+            }
+            
+            .quick-item {
+                padding: 18px;
+            }
+            
+            .edu-card {
+                padding: 40px 32px;
+            }
+            
+            .edu-title {
+                font-size: 28px;
+            }
+            
+            .edu-features {
+                gap: 20px;
+            }
+            
+            .edu-feature {
+                padding: 24px;
+            }
+            
+            .btn {
+                height: 52px;
+                font-size: 17px;
+            }
+            
+            .form-input,
+            .form-select {
+                height: 52px;
+                font-size: 16px;
+            }
+            
+            .form-textarea {
+                min-height: 140px;
+            }
+        }
+
+        /* ==================== IE兼容性回退 ==================== */
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            .splash-screen,
+            .welcome-section,
+            .service-card,
+            .quick-actions,
+            .edu-card {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            
+            .page {
+                display: none;
+            }
+            
+            .page.active {
+                display: block;
+                opacity: 1;
+                transform: none;
+            }
+            
+            .services-grid,
+            .type-options,
+            .edu-features,
+            .quick-list,
+            .header-top,
+            .section-header,
+            .welcome-time {
+                display: block;
+            }
+            
+            .service-card,
+            .type-option,
+            .edu-feature {
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 16px;
+                margin-bottom: 16px;
+            }
+            
+            .quick-item {
+                display: block;
+                margin-bottom: 12px;
+            }
+            
+            .bottom-nav {
+                display: block;
+                text-align: center;
+            }
+            
+            .nav-item {
+                display: inline-block;
+                vertical-align: top;
+                margin: 0 10px;
+            }
+        }
+
+        /* ==================== 触摸设备优化 ==================== */
+        @media (hover: none) and (pointer: coarse) {
+            .service-card:hover {
+                transform: none;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            }
+            
+            .quick-item:hover {
+                background: var(--bg-color);
+            }
+            
+            .service-card:active {
+                -webkit-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+            
+            .quick-item:active {
+                background: #e0e0e0;
+            }
+            
+            .type-option:active {
+                border-color: var(--primary-color);
+                background: rgba(7, 193, 96, 0.1);
+            }
+            
+            .btn:active {
+                opacity: 0.9;
+            }
+            
+            .nav-item:active {
+                opacity: 0.8;
+            }
+        }
+
+        /* ==================== 高分辨率屏幕优化 ==================== */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .splash-logo,
+            .service-icon,
+            .quick-icon,
+            .edu-icon,
+            .edu-feature-icon,
+            .type-option-icon,
+            .success-icon {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+        }
+
+        /* ==================== 打印样式 ==================== */
+        @media print {
+            .splash-screen,
+            .bottom-nav,
+            .success-modal {
+                display: none !important;
+            }
+            
+            .app-container {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .page-content {
+                padding: 0;
+            }
+            
+            .service-card,
+            .quick-actions,
+            .form-section,
+            .edu-card,
+            .edu-feature {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+        }
+
+        /* ==================== 暗色模式支持（可选）==================== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a2e;
+                --card-bg: #16213e;
+                --text-primary: #e0e0e0;
+                --text-secondary: #b0b0b0;
+                --text-hint: #808080;
+                --border-color: #2a2a4a;
+            }
+            
+            .app-header {
+                background: linear-gradient(135deg, #0a8f4a 0%, #057a3f 100%);
+            }
+            
+            .splash-screen {
+                background: linear-gradient(135deg, #0a8f4a 0%, #057a3f 50%, #046b35 100%);
+            }
+            
+            .service-card,
+            .quick-actions,
+            .form-section,
+            .edu-feature {
+                background: var(--card-bg);
+            }
+            
+            .bottom-nav {
+                background: var(--card-bg);
+                border-top-color: var(--border-color);
+            }
+            
+            .form-input,
+            .form-select,
+            .form-textarea {
+                background: var(--card-bg);
+                color: var(--text-primary);
+            }
+            
+            .success-content {
+                background: var(--card-bg);
+            }
+        }
+
+        /* ==================== 错误提示样式 ==================== */
+        .error-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            -webkit-transform: translateX(-50%) translateY(-100px);
+            -moz-transform: translateX(-50%) translateY(-100px);
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--danger-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10000;
+            -webkit-transition: transform 0.3s ease;
+            -moz-transition: transform 0.3s ease;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .error-toast.show {
+            -webkit-transform: translateX(-50%) translateY(0);
+            -moz-transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ==================== 加载状态 ==================== */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            -webkit-animation: spin 1s ease-in-out infinite;
+            -moz-animation: spin 1s ease-in-out infinite;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @-webkit-keyframes spin {
+            to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+        }
+        @-moz-keyframes spin {
+            to { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+        }
+        @-o-keyframes spin {
+            to { -o-transform: rotate(360deg); transform: rotate(360deg); }
+        }
+        @keyframes spin {
+            to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -ms-transform: rotate(360deg); -o-transform: rotate(360deg); transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 启动动画 -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="particles-container" id="particles"></div>
+        <div class="splash-logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+        </div>
+        <div class="splash-title">614宿舍综合平台</div>
+        <div class="splash-subtitle">便捷服务，智慧生活</div>
+        <div class="splash-loading">
+            <div class="splash-loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- 错误提示 -->
+    <div class="error-toast" id="errorToast"></div>
+
+    <!-- 主应用 -->
+    <div class="app-container" id="app">
+        <header class="app-header">
+            <div class="header-top">
+                <div class="header-back" id="backBtn" onclick="goBack()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                </div>
+                <h1 class="header-title" id="headerTitle">614宿舍综合平台</h1>
+                <div class="header-placeholder"></div>
+            </div>
+            <div class="search-box" id="searchBox">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <span>搜索服务...</span>
+            </div>
+        </header>
+
+        <!-- 首页 -->
+        <div class="page active" id="homePage">
+            <div class="page-content">
+                <div class="welcome-section">
+                    <div class="welcome-title">你好，欢迎使用</div>
+                    <div class="welcome-desc">614宿舍综合服务平台为您提供便捷服务</div>
+                    <div class="welcome-time">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                        <span id="currentTime"></span>
+                    </div>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card" onclick="navigateTo('appointment')">
+                        <div class="service-icon blue">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                            </svg>
+                        </div>
+                        <div class="service-name">访问预约</div>
+                        <div class="service-desc">在线预约</div>
+                    </div>
+
+                    <div class="service-card" onclick="navigateTo('complaint')">
+                        <div class="service-icon green">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+                            </svg>
+                        </div>
+                        <div class="service-name">投诉建议</div>
+                        <div class="service-desc">意见反馈</div>
+                    </div>
+
+                    <div class="service-card" onclick="navigateTo('education')">
+                        <div class="service-icon purple">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                            </svg>
+                        </div>
+                        <div class="service-name">教育事务</div>
+                        <div class="service-desc">教务管理</div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <div class="section-header">
+                        <div class="section-title">常用服务</div>
+                        <div class="section-more">查看更多 ›</div>
+                    </div>
+                    <div class="quick-list">
+                        <div class="quick-item" onclick="navigateTo('appointment')">
+                            <div class="quick-icon" style="background: linear-gradient(135deg, #4A90D9, #357ABD); background: -webkit-linear-gradient(135deg, #4A90D9, #357ABD);">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                                </svg>
+                            </div>
+                            <div class="quick-info">
+                                <div class="quick-title">访问预约</div>
+                                <div class="quick-desc">预约访问时间与原因</div>
+                            </div>
+                            <svg class="quick-arrow" viewBox="0 0 24 24">
+                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                            </svg>
+                        </div>
+
+                        <div class="quick-item" onclick="navigateTo('complaint')">
+                            <div class="quick-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); background: -webkit-linear-gradient(135deg, var(--primary-color), var(--primary-dark));">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+                                </svg>
+                            </div>
+                            <div class="quick-info">
+                                <div class="quick-title">投诉与建议</div>
+                                <div class="quick-desc">反馈问题与建议</div>
+                            </div>
+                            <svg class="quick-arrow" viewBox="0 0 24 24">
+                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                            </svg>
+                        </div>
+
+                        <div class="quick-item" onclick="navigateTo('education')">
+                            <div class="quick-icon" style="background: linear-gradient(135deg, #9B59B6, #8E44AD); background: -webkit-linear-gradient(135deg, #9B59B6, #8E44AD);">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                                </svg>
+                            </div>
+                            <div class="quick-info">
+                                <div class="quick-title">教育事务管理</div>
+                                <div class="quick-desc">访问教务系统</div>
+                            </div>
+                            <svg class="quick-arrow" viewBox="0 0 24 24">
+                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 访问预约页面 -->
+        <div class="page" id="appointmentPage">
+            <div class="page-content">
+                <div class="form-section">
+                    <div class="form-section-title">预约信息</div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            预约日期
+                            <span class="required">*</span>
+                        </label>
+                        <input type="date" class="form-input" id="appointmentDate" required>
+                        <div class="form-error">请选择预约日期</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            预约时间
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" id="appointmentTime">
+                            <option value="">请选择预约时间</option>
+                            <option value="08:00-09:00">08:00 - 09:00</option>
+                            <option value="09:00-10:00">09:00 - 10:00</option>
+                            <option value="10:00-11:00">10:00 - 11:00</option>
+                            <option value="11:00-12:00">11:00 - 12:00</option>
+                            <option value="14:00-15:00">14:00 - 15:00</option>
+                            <option value="15:00-16:00">15:00 - 16:00</option>
+                            <option value="16:00-17:00">16:00 - 17:00</option>
+                            <option value="17:00-18:00">17:00 - 18:00</option>
+                            <option value="19:00-20:00">19:00 - 20:00</option>
+                            <option value="20:00-21:00">20:00 - 21:00</option>
+                        </select>
+                        <div class="form-error">请选择预约时间</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            预约原因
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" id="appointmentReason">
+                            <option value="">请选择预约原因</option>
+                            <option value="visit">拜访同学</option>
+                            <option value="meeting">会议交流</option>
+                            <option value="study">学习讨论</option>
+                            <option value="activity">宿舍活动</option>
+                            <option value="other">其他原因</option>
+                        </select>
+                        <div class="form-error">请选择预约原因</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">个人信息</div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            姓名
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="form-input" id="personName" placeholder="请输入您的姓名">
+                        <div class="form-error">请输入姓名</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            手机号
+                            <span class="required">*</span>
+                        </label>
+                        <input type="tel" class="form-input" id="personPhone" placeholder="请输入手机号码" maxlength="11">
+                        <div class="form-error">请输入正确的手机号码</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            身份证号
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="form-input" id="personIdCard" placeholder="请输入身份证号码" maxlength="18">
+                        <div class="form-error">请输入正确的身份证号码</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block" onclick="submitAppointment()">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    提交预约
+                </button>
+            </div>
+        </div>
+
+        <!-- 投诉建议页面 -->
+        <div class="page" id="complaintPage">
+            <div class="page-content">
+                <div class="form-section">
+                    <div class="form-section-title">投诉类型</div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            选择类型
+                            <span class="required">*</span>
+                        </label>
+                        <div class="type-options">
+                            <div class="type-option" onclick="selectType(this, 'noise')">
+                                <div class="type-option-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                                    </svg>
+                                </div>
+                                <div class="type-option-name">噪音投诉</div>
+                                <div class="type-option-desc">宿舍噪音问题</div>
+                            </div>
+
+                            <div class="type-option" onclick="selectType(this, 'facility')">
+                                <div class="type-option-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                                    </svg>
+                                </div>
+                                <div class="type-option-name">设施报修</div>
+                                <div class="type-option-desc">宿舍设施损坏</div>
+                            </div>
+
+                            <div class="type-option" onclick="selectType(this, 'hygiene')">
+                                <div class="type-option-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                </div>
+                                <div class="type-option-name">卫生问题</div>
+                                <div class="type-option-desc">环境卫生投诉</div>
+                            </div>
+
+                            <div class="type-option" onclick="selectType(this, 'suggestion')">
+                                <div class="type-option-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/>
+                                    </svg>
+                                </div>
+                                <div class="type-option-name">改善建议</div>
+                                <div class="type-option-desc">提出改善建议</div>
+                            </div>
+                        </div>
+                        <div class="form-error">请选择投诉类型</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">详细内容</div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            投诉内容
+                            <span class="required">*</span>
+                        </label>
+                        <textarea class="form-textarea" id="complaintContent" placeholder="请详细描述您遇到的问题或建议..."></textarea>
+                        <div class="form-error">请填写投诉内容</div>
+                        <div class="form-hint">请尽可能详细描述，以便我们更好地处理您的反馈</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">联系方式（选填）</label>
+                        <input type="text" class="form-input" id="complaintContact" placeholder="手机号或邮箱">
+                        <div class="form-hint">留下联系方式，方便我们及时反馈处理结果</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block" onclick="submitComplaint()">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                    提交反馈
+                </button>
+            </div>
+        </div>
+
+        <!-- 教育事务页面 -->
+        <div class="page" id="educationPage">
+            <div class="page-content">
+                <div class="edu-card">
+                    <div class="edu-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                        </svg>
+                    </div>
+                    <div class="edu-title">教育事务管理</div>
+                    <div class="edu-desc">一站式教务服务，轻松管理学业</div>
+                    <a href="https://newjwxt.zjkju.edu.cn/xtgl/login_slogin.html" target="_blank" rel="noopener noreferrer" class="edu-link">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                        </svg>
+                        进入教务系统
+                    </a>
+                </div>
+
+                <div class="edu-features">
+                    <div class="edu-feature">
+                        <div class="edu-feature-icon" style="background: linear-gradient(135deg, #4A90D9, #357ABD); background: -webkit-linear-gradient(135deg, #4A90D9, #357ABD);">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                            </svg>
+                        </div>
+                        <div class="edu-feature-title">课表查询</div>
+                        <div class="edu-feature-desc">查看个人课程安排</div>
+                    </div>
+
+                    <div class="edu-feature">
+                        <div class="edu-feature-icon" style="background: linear-gradient(135deg, #2ECC71, #27AE60); background: -webkit-linear-gradient(135deg, #2ECC71, #27AE60);">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <div class="edu-feature-title">成绩查询</div>
+                        <div class="edu-feature-desc">查看考试成绩</div>
+                    </div>
+
+                    <div class="edu-feature">
+                        <div class="edu-feature-icon" style="background: linear-gradient(135deg, #E74C3C, #C0392B); background: -webkit-linear-gradient(135deg, #E74C3C, #C0392B);">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+                            </svg>
+                        </div>
+                        <div class="edu-feature-title">选课系统</div>
+                        <div class="edu-feature-desc">在线选课操作</div>
+                    </div>
+
+                    <div class="edu-feature">
+                        <div class="edu-feature-icon" style="background: linear-gradient(135deg, #F39C12, #E67E22); background: -webkit-linear-gradient(135deg, #F39C12, #E67E22);">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                            </svg>
+                        </div>
+                        <div class="edu-feature-title">考试安排</div>
+                        <div class="edu-feature-desc">查看考试时间</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 成功提示弹窗 -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+            </div>
+            <div class="success-title" id="successTitle">提交成功</div>
+            <div class="success-desc" id="successDesc">您的申请已提交，请等待审核</div>
+            <button class="btn btn-primary btn-block success-btn" onclick="closeSuccessModal()">我知道了</button>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="navigateTo('home')">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+            </div>
+            <div class="nav-text">首页</div>
+        </div>
+        <div class="nav-item" onclick="navigateTo('appointment')">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                </svg>
+            </div>
+            <div class="nav-text">预约</div>
+        </div>
+        <div class="nav-item" onclick="navigateTo('complaint')">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+                </svg>
+            </div>
+            <div class="nav-text">反馈</div>
+        </div>
+        <div class="nav-item" onclick="navigateTo('education')">
+            <div class="nav-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                </svg>
+            </div>
+            <div class="nav-text">教育</div>
+        </div>
+    </nav>
+
+    <script>
+        // ==================== requestAnimationFrame兼容性 ====================
+        (function() {
+            var lastTime = 0;
+            var vendors = ['webkit', 'moz', 'ms', 'o'];
+            for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() { callback(currTime + timeToCall); }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+            }
+
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+            }
+        })();
+
+        // ==================== localStorage管理器 ====================
+        var StorageManager = {
+            prefix: '614dormitory_',
+            
+            get: function(key) {
+                try {
+                    var fullKey = this.prefix + key;
+                    var value = localStorage.getItem(fullKey);
+                    return value ? JSON.parse(value) : null;
+                } catch (e) {
+                    console.error('StorageManager.get error:', e);
+                    return null;
+                }
+            },
+            
+            set: function(key, value) {
+                try {
+                    var fullKey = this.prefix + key;
+                    localStorage.setItem(fullKey, JSON.stringify(value));
+                    return true;
+                } catch (e) {
+                    console.error('StorageManager.set error:', e);
+                    return false;
+                }
+            },
+            
+            remove: function(key) {
+                try {
+                    var fullKey = this.prefix + key;
+                    localStorage.removeItem(fullKey);
+                    return true;
+                } catch (e) {
+                    console.error('StorageManager.remove error:', e);
+                    return false;
+                }
+            },
+            
+            clear: function() {
+                try {
+                    var keysToRemove = [];
+                    for (var i = 0; i < localStorage.length; i++) {
+                        var key = localStorage.key(i);
+                        if (key.indexOf(this.prefix) === 0) {
+                            keysToRemove.push(key);
+                        }
+                    }
+                    keysToRemove.forEach(function(key) {
+                        localStorage.removeItem(key);
+                    });
+                    return true;
+                } catch (e) {
+                    console.error('StorageManager.clear error:', e);
+                    return false;
+                }
+            }
+        };
+
+        // ==================== 全局变量 ====================
+        var currentPage = 'home';
+        var selectedComplaintType = '';
+        var pageHistory = [];
+        var isAnimating = false;
+        var currentTimeInterval = null;
+
+        // ==================== 错误处理 ====================
+        function showError(message) {
+            var toast = document.getElementById('errorToast');
+            if (toast) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // ==================== 安全的DOM操作 ====================
+        function safeGetElement(id) {
+            var element = document.getElementById(id);
+            if (!element) {
+                console.warn('Element not found:', id);
+            }
+            return element;
+        }
+
+        function safeQuerySelector(selector) {
+            var element = document.querySelector(selector);
+            if (!element) {
+                console.warn('Element not found:', selector);
+            }
+            return element;
+        }
+
+        // ==================== 初始化 ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                initSplashScreen();
+                initParticles();
+                updateCurrentTime();
+                currentTimeInterval = setInterval(updateCurrentTime, 1000);
+                setDefaultDate();
+                
+                // 使用requestAnimationFrame确保动画流畅
+                requestAnimationFrame(function() {
+                    var app = safeGetElement('app');
+                    if (app) {
+                        app.style.opacity = '1';
+                    }
+                });
+                
+                // 添加触摸事件支持
+                addTouchSupport();
+                
+                // 添加视口变化监听
+                addResizeListener();
+                
+            } catch (e) {
+                console.error('Initialization error:', e);
+                showError('页面初始化失败，请刷新重试');
+            }
+        });
+
+        // ==================== 启动动画 ====================
+        function initSplashScreen() {
+            var splash = safeGetElement('splashScreen');
+            if (!splash) return;
+            
+            setTimeout(function() {
+                splash.classList.add('fade-out');
+                setTimeout(function() {
+                    splash.style.display = 'none';
+                }, 800);
+            }, 2800);
+        }
+
+        // ==================== 粒子效果（优化性能）====================
+        function initParticles() {
+            var container = safeGetElement('particles');
+            if (!container) return;
+            
+            // 使用文档片段减少DOM操作
+            var fragment = document.createDocumentFragment();
+            // 根据屏幕大小调整粒子数量
+            var particleCount = window.innerWidth < 768 ? 10 : 20;
+            
+            for (var i = 0; i < particleCount; i++) {
+                var particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                var size = Math.random() * 6 + 3 + 'px';
+                particle.style.width = size;
+                particle.style.height = size;
+                particle.style.animationDuration = Math.random() * 3 + 4 + 's';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                fragment.appendChild(particle);
+            }
+            
+            container.appendChild(fragment);
+        }
+
+        // ==================== 触摸支持 ====================
+        function addTouchSupport() {
+            // 检测触摸设备
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                document.body.classList.add('touch-device');
+                
+                // 添加触摸反馈
+                var touchElements = document.querySelectorAll('.service-card, .quick-item, .type-option, .btn, .nav-item');
+                for (var i = 0; i < touchElements.length; i++) {
+                    (function(element) {
+                        element.addEventListener('touchstart', function() {
+                            this.classList.add('touching');
+                        }, { passive: true });
+                        
+                        element.addEventListener('touchend', function() {
+                            this.classList.remove('touching');
+                        }, { passive: true });
+                        
+                        element.addEventListener('touchcancel', function() {
+                            this.classList.remove('touching');
+                        }, { passive: true });
+                    })(touchElements[i]);
+                }
+            }
+        }
+
+        // ==================== 视口变化监听 ====================
+        function addResizeListener() {
+            var resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    // 重新初始化粒子效果
+                    var container = safeGetElement('particles');
+                    if (container) {
+                        container.innerHTML = '';
+                        initParticles();
+                    }
+                }, 250);
+            }, { passive: true });
+        }
+
+        // ==================== 更新时间 ====================
+        function updateCurrentTime() {
+            try {
+                var now = new Date();
+                var options = { 
+                    year: 'numeric', 
+                    month: '2-digit', 
+                    day: '2-digit',
+                    weekday: 'long',
+                    hour: '2-digit', 
+                    minute: '2-digit'
+                };
+                var timeElement = safeGetElement('currentTime');
+                if (timeElement) {
+                    timeElement.textContent = now.toLocaleDateString('zh-CN', options);
+                }
+            } catch (e) {
+                console.error('Time update error:', e);
+            }
+        }
+
+        // ==================== 设置默认日期 ====================
+        function setDefaultDate() {
+            try {
+                var today = new Date();
+                var tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                var dateInput = safeGetElement('appointmentDate');
+                if (dateInput) {
+                    dateInput.min = tomorrow.toISOString().split('T')[0];
+                }
+            } catch (e) {
+                console.error('Date setup error:', e);
+            }
+        }
+
+        // ==================== 页面导航（优化动画）====================
+        function navigateTo(page) {
+            if (page === currentPage || isAnimating) return;
+            
+            isAnimating = true;
+            pageHistory.push(currentPage);
+            
+            var pages = {
+                'home': 'homePage',
+                'appointment': 'appointmentPage',
+                'complaint': 'complaintPage',
+                'education': 'educationPage'
+            };
+
+            var titles = {
+                'home': '614宿舍综合平台',
+                'appointment': '访问预约',
+                'complaint': '投诉与建议',
+                'education': '教育事务管理'
+            };
+
+            // 使用requestAnimationFrame优化动画
+            requestAnimationFrame(function() {
+                // 隐藏当前页面
+                var currentEl = safeQuerySelector('.page.active');
+                if (currentEl) {
+                    currentEl.style.animation = 'slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                }
+
+                // 显示目标页面
+                setTimeout(function() {
+                    if (currentEl) {
+                        currentEl.classList.remove('active');
+                        currentEl.style.animation = '';
+                    }
+
+                    var targetPage = safeGetElement(pages[page]);
+                    if (targetPage) {
+                        targetPage.classList.add('active');
+                        targetPage.style.animation = 'slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                        
+                        setTimeout(function() {
+                            targetPage.style.animation = '';
+                            isAnimating = false;
+                        }, 400);
+                    } else {
+                        isAnimating = false;
+                    }
+                }, 100);
+            });
+
+            // 更新标题
+            var headerTitle = safeGetElement('headerTitle');
+            if (headerTitle) {
+                headerTitle.textContent = titles[page] || '614宿舍综合平台';
+            }
+            
+            // 显示/隐藏返回按钮
+            var backBtn = safeGetElement('backBtn');
+            if (backBtn) {
+                backBtn.style.display = page === 'home' ? 'none' : 'flex';
+            }
+            
+            // 更新底部导航
+            var navItems = document.querySelectorAll('.nav-item');
+            for (var i = 0; i < navItems.length; i++) {
+                navItems[i].classList.remove('active');
+            }
+            
+            var navIndex = 0;
+            if (page === 'home') navIndex = 0;
+            else if (page === 'appointment') navIndex = 1;
+            else if (page === 'complaint') navIndex = 2;
+            else if (page === 'education') navIndex = 3;
+            
+            if (navItems[navIndex]) {
+                navItems[navIndex].classList.add('active');
+            }
+
+            // 更新搜索框显示
+            var searchBox = safeGetElement('searchBox');
+            if (searchBox) {
+                searchBox.style.display = page === 'home' ? 'flex' : 'none';
+            }
+
+            currentPage = page;
+        }
+
+        // ==================== 返回上一页 ====================
+        function goBack() {
+            if (pageHistory.length > 0) {
+                var prevPage = pageHistory.pop();
+                navigateTo(prevPage);
+                pageHistory.pop();
+            } else {
+                navigateTo('home');
+            }
+        }
+
+        // ==================== 选择投诉类型 ====================
+        function selectType(element, type) {
+            var options = document.querySelectorAll('.type-option');
+            for (var i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
+            element.classList.add('selected');
+            selectedComplaintType = type;
+            
+            // 移除错误状态
+            var formGroup = element.closest('.form-group');
+            if (formGroup) {
+                formGroup.classList.remove('error');
+            }
+        }
+
+        // ==================== 表单验证 ====================
+        function validateAppointment() {
+            var isValid = true;
+            var fields = ['appointmentDate', 'appointmentTime', 'appointmentReason', 'personName', 'personPhone', 'personIdCard'];
+            
+            for (var i = 0; i < fields.length; i++) {
+                var input = safeGetElement(fields[i]);
+                if (input) {
+                    var formGroup = input.closest('.form-group');
+                    
+                    if (!input.value) {
+                        formGroup.classList.add('error');
+                        isValid = false;
+                    } else {
+                        formGroup.classList.remove('error');
+                    }
+                }
+            }
+
+            // 验证手机号
+            var phone = safeGetElement('personPhone');
+            if (phone && phone.value && !/^1[3-9]\d{9}$/.test(phone.value)) {
+                phone.closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            // 验证身份证号
+            var idCard = safeGetElement('personIdCard');
+            if (idCard && idCard.value && !/^\d{17}[\dXx]$/.test(idCard.value)) {
+                idCard.closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validateComplaint() {
+            var isValid = true;
+            
+            var typeOptions = safeQuerySelector('.type-options');
+            if (typeOptions) {
+                var typeGroup = typeOptions.closest('.form-group');
+                if (!selectedComplaintType) {
+                    typeGroup.classList.add('error');
+                    isValid = false;
+                } else {
+                    typeGroup.classList.remove('error');
+                }
+            }
+
+            var content = safeGetElement('complaintContent');
+            if (content) {
+                if (!content.value.trim()) {
+                    content.closest('.form-group').classList.add('error');
+                    isValid = false;
+                } else {
+                    content.closest('.form-group').classList.remove('error');
+                }
+            }
+
+            return isValid;
+        }
+
+        // ==================== 提交表单 ====================
+        function submitAppointment() {
+            try {
+                if (!validateAppointment()) {
+                    return;
+                }
+
+                var formData = {
+                    id: 'APT' + Date.now(),
+                    date: safeGetElement('appointmentDate').value,
+                    time: safeGetElement('appointmentTime').value,
+                    reason: safeGetElement('appointmentReason').options[safeGetElement('appointmentReason').selectedIndex].text,
+                    name: safeGetElement('personName').value,
+                    phone: safeGetElement('personPhone').value,
+                    idCard: safeGetElement('personIdCard').value,
+                    status: 'pending',
+                    createdAt: new Date().toLocaleString('zh-CN')
+                };
+
+                // 保存到localStorage
+                var appointments = StorageManager.get('appointments') || [];
+                appointments.push(formData);
+                StorageManager.set('appointments', appointments);
+
+                console.log('预约数据:', formData);
+                
+                showSuccessModal('预约提交成功', '您的访问预约已提交，请注意查看手机通知');
+                resetAppointmentForm();
+                
+                // 记录操作日志
+                addLog('appointment', '用户' + formData.name + '提交访问预约', formData.name);
+            } catch (e) {
+                console.error('Submit appointment error:', e);
+                showError('提交失败，请重试');
+            }
+        }
+
+        function submitComplaint() {
+            try {
+                if (!validateComplaint()) {
+                    return;
+                }
+
+                var formData = {
+                    id: 'CMP' + Date.now(),
+                    type: selectedComplaintType,
+                    content: safeGetElement('complaintContent').value,
+                    contact: safeGetElement('complaintContact').value,
+                    status: 'pending',
+                    createdAt: new Date().toLocaleString('zh-CN')
+                };
+
+                // 保存到localStorage
+                var complaints = StorageManager.get('complaints') || [];
+                complaints.push(formData);
+                StorageManager.set('complaints', complaints);
+
+                console.log('投诉数据:', formData);
+                
+                showSuccessModal('反馈提交成功', '感谢您的反馈，我们会尽快处理');
+                resetComplaintForm();
+                
+                // 记录操作日志
+                addLog('complaint', '用户提交' + getComplaintTypeName(formData.type) + '投诉', '用户');
+            } catch (e) {
+                console.error('Submit complaint error:', e);
+                showError('提交失败，请重试');
+            }
+        }
+
+        // ==================== 重置表单 ====================
+        function resetAppointmentForm() {
+            var fields = ['appointmentDate', 'appointmentTime', 'appointmentReason', 'personName', 'personPhone', 'personIdCard'];
+            for (var i = 0; i < fields.length; i++) {
+                var el = safeGetElement(fields[i]);
+                if (el) el.value = '';
+            }
+            
+            var groups = document.querySelectorAll('#appointmentPage .form-group');
+            for (var j = 0; j < groups.length; j++) {
+                groups[j].classList.remove('error');
+            }
+        }
+
+        function resetComplaintForm() {
+            selectedComplaintType = '';
+            
+            var options = document.querySelectorAll('.type-option');
+            for (var i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
+            
+            var content = safeGetElement('complaintContent');
+            if (content) content.value = '';
+            
+            var contact = safeGetElement('complaintContact');
+            if (contact) contact.value = '';
+            
+            var groups = document.querySelectorAll('#complaintPage .form-group');
+            for (var j = 0; j < groups.length; j++) {
+                groups[j].classList.remove('error');
+            }
+        }
+
+        // ==================== 成功提示 ====================
+        function showSuccessModal(title, desc) {
+            var titleEl = safeGetElement('successTitle');
+            var descEl = safeGetElement('successDesc');
+            var modal = safeGetElement('successModal');
+            
+            if (titleEl) titleEl.textContent = title;
+            if (descEl) descEl.textContent = desc;
+            if (modal) modal.classList.add('show');
+        }
+
+        function closeSuccessModal() {
+            var modal = safeGetElement('successModal');
+            if (modal) modal.classList.remove('show');
+        }
+
+        // ==================== 操作日志 ====================
+        function addLog(type, content, user) {
+            try {
+                var logs = StorageManager.get('logs') || [];
+                var newLog = {
+                    id: 'LOG' + Date.now(),
+                    type: type,
+                    content: content,
+                    user: user || 'system',
+                    ip: '192.168.1.' + Math.floor(Math.random() * 255),
+                    time: new Date().toLocaleString('zh-CN'),
+                    status: 'success'
+                };
+                logs.push(newLog);
+                StorageManager.set('logs', logs);
+            } catch (e) {
+                console.error('Add log error:', e);
+            }
+        }
+
+        // ==================== 辅助函数 ====================
+        function getComplaintTypeName(type) {
+            var names = { 'noise': '噪音投诉', 'facility': '设施报修', 'hygiene': '卫生问题', 'suggestion': '改善建议' };
+            return names[type] || type;
+        }
+
+        // ==================== 输入框实时验证（使用事件委托）====================
+        document.addEventListener('input', function(e) {
+            try {
+                var target = e.target;
+                if (target.classList.contains('form-input') || 
+                    target.classList.contains('form-select') || 
+                    target.classList.contains('form-textarea')) {
+                    var formGroup = target.closest('.form-group');
+                    if (formGroup) {
+                        formGroup.classList.remove('error');
+                    }
+                }
+            } catch (e) {
+                console.error('Input validation error:', e);
+            }
+        });
+
+        document.addEventListener('change', function(e) {
+            try {
+                var target = e.target;
+                if (target.classList.contains('form-select')) {
+                    var formGroup = target.closest('.form-group');
+                    if (formGroup) {
+                        formGroup.classList.remove('error');
+                    }
+                }
+            } catch (e) {
+                console.error('Change validation error:', e);
+            }
+        });
+
+        // ==================== 点击弹窗外部关闭 ====================
+        document.addEventListener('click', function(e) {
+            try {
+                var modal = safeGetElement('successModal');
+                if (modal && e.target === modal) {
+                    closeSuccessModal();
+                }
+            } catch (e) {
+                console.error('Modal close error:', e);
+            }
+        });
+
+        // ==================== 清理资源 ====================
+        window.addEventListener('beforeunload', function() {
+            if (currentTimeInterval) {
+                clearInterval(currentTimeInterval);
+            }
+        });
+    </script>
+</body>
+</html>
