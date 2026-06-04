@@ -1,0 +1,12 @@
+{
+  "name": "614-dorm-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "614 dormitory platform static frontend and optional cloud sync backend.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
